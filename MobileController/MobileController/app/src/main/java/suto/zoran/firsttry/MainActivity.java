@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -315,17 +316,19 @@ public class MainActivity extends AppCompatActivity implements JoyStick.Joystick
 
     @Override
     public void onJoystickMoved(float xPercent, float yPercent, int id) {
-        //Log.d("Main Method", "X percent: " + xPercent + " Y percent: " + yPercent);
+        Log.d("Main Method", "X percent: " + xPercent + " Y percent: " + yPercent);
         double curMouseAngle = Math.atan2(yPercent, xPercent);
-        //Log.d("Main Method", "ANGLE11111111111111: " +  curMouseAngle);
+        Log.d("Main Method", "ANGLE11111111111111: " +  curMouseAngle);
 
-        curMouseAngle = curMouseAngle / Math.PI * 180;
-
+        double curMouseAngle2 = curMouseAngle / Math.PI * 180;
+        //double x = cx + 80 * Math.cos(curMouseAngle);
+        //double y = cy + 80 * Math.sin(curMouseAngle);
         JSONObject object = new JSONObject();
         try {
             object.put("code", code);
             object.put("inputId", "mouseAngle");
-            object.put("state", curMouseAngle);
+            object.put("angle", curMouseAngle);
+            object.put("state", curMouseAngle2);
         } catch (JSONException e) {
             e.printStackTrace();
         }
